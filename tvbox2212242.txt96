@@ -20,7 +20,7 @@
 {"key":"csp_xp_gongreng","name":"👷工人影视(XP)","type":3,"api":"csp_XPathMacFilter","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://shadowchiu369.github.io/TVBox/MaooXP/gongren.json"},
 {"key":"csp_xpath_libv","name":"🌊Libvio(XP)","type":3,"api":"csp_XPathMacFilter","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://shadowchiu369.github.io/TVBox/MaooXP/libv.json"},
 {"key":"csp_xpath_zxzj2","name":"🏡在线之家(XPF)","type":3,"api":"csp_XPathFilter","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://shadowchiu369.github.io/TVBox/MaooXP/zxzj2.json"},
-{"key":"csp_555dy","name":"5️⃣555影视(XPF)","type":3,"api":"csp_XPathFilter","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://shadowchiu369.github.io/TVBox/MaooXP/555dy.json"},
+{"key":"csp_555dy","name":"5️⃣555影视(XPF)","type":3,"api":"csp_XPathFilter","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://jsd.cdn.zzko.cn/gh/zhanghong1983/TVBOXZY@50a3d7a152f7f87763d97694a2b34b6fcdce34ea/XP/555dy.json"},
 {"key":"csp_xpath_UM","name":"🎗UM影院(XPMF)","type":3,"api":"csp_XPathMacFilter","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://shadowchiu369.github.io/TVBox/MaooXP/UM.json"},
 {"key":"csp_xp_Gimy","name":"🪃Gimy影院(XPMF)","type":3,"api":"csp_XPathMacFilter","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://shadowchiu369.github.io/TVBox/MaooXP/Gimy2.json"},
 {"key":"csp_xp_酷奇mv","name":"📺酷奇MV","type":3,"api":"csp_XPath","searchable":0,"quickSearch":0,"filterable":0,"ext":"https://cdn.jsdelivr.net/gh/XuQqu/PinkBird@main/XP/酷奇MV.json"},
