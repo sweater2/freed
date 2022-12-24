@@ -34,7 +34,7 @@
 {"key":"csp_biubiu_六度TV","name":"🥒六度TV","type":3,"api":"csp_XBiubiu","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://freed.yuanhsing.cf/TVBox/MaooXB2/六度TV.json"},
 {"key":"csp_biubiu_双十电影","name":"🥒双十电影","type":3,"api":"csp_XBiubiu","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://freed.yuanhsing.cf/TVBox/MaooXB2/双十电影.json"},
 {"key":"csp_biubiu_23影院","name":"🥒23影院","type":3,"api":"csp_XBiubiu","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://freed.yuanhsing.cf/TVBox/MaooXB2/23影院.json"},
-{"key":"csp_biubiu_YYDS影院","name":"🥒YYDS影院","type":3,"api":"csp_XBiubiu","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://jsd.cdn.zzko.cn/gh/sweater2/freed@master/yyds.json"},
+{"key":"csp_biubiu_YYDS影院","name":"🥒YYDS影院","type":3,"api":"csp_XBiubiu","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://freed.yuanhsing.cf/TVBox/MaooXB2/YYDS影院.json"},
 {"key":"csp_biubiu_如如影视","name":"🥒如如影视","type":3,"api":"csp_XBiubiu","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://freed.yuanhsing.cf/TVBox/MaooXB2/如如影视.json"},
 {"key":"csp_biubiu_神马接口","name":"🥒神马接口","type":3,"api":"csp_XBiubiu","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://freed.yuanhsing.cf/TVBox/MaooXB2/神马接口.json"},
 {"key":"csp_biubiu_GIMY影视","name":"🥒GIMY影视","type":3,"api":"csp_XBiubiu","searchable":1,"quickSearch":1,"filterable":1,"ext":"https://freed.yuanhsing.cf/TVBox/MaooXB2/GIMY影视.json"},
