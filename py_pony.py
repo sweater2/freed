@@ -57,13 +57,13 @@ class Spider(Spider):  # 元类 默认的元类 type
 		videos = []
 		_xpath_str = lambda n, s, sep='--': sep.join(n.xpath(s))
 		for i, a in enumerate(aList):
-			videos.append({
-				"vod_id":str(i+1),
-				"vod_name":'--'.join(map(str, [str(i+1000), tid, pg, filter, extend])),
-				"vod_pic":'',
-				"vod_remarks":''
-			})
-			continue
+			# videos.append({
+			# 	"vod_id":str(i+1),
+			# 	"vod_name":'--'.join(map(str, [str(i+1000), tid, pg, filter, extend])),
+			# 	"vod_pic":'',
+			# 	"vod_remarks":''
+			# })
+			# continue
 			name = _xpath_str(a, './img/@alt[1]')
 			pic = _xpath_str(a, './img/@data-url[1]')
 			pic = 'https://'+pic.lstrip('/') if pic.startswith('/') else pic
