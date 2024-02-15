@@ -39,11 +39,15 @@ class Spider(Spider):  # 元类 默认的元类 type
 
 		videos = []
 		for a in aList:
-			name = a.xpath('./@title')[0]
-			pic = a.xpath('./@data-original')[0]
-			mark = a.xpath("./span[@class='pic-text text-right']/text()")[0]
-			sid = a.xpath("./@href")[0]
-			sid = self.regStr(sid,"/detail/(\\S+).html")
+			# name = a.xpath('./@title')[0]
+			# pic = a.xpath('./@data-original')[0]
+			# mark = a.xpath("./span[@class='pic-text text-right']/text()")[0]
+			# sid = a.xpath("./@href")[0]
+			# sid = self.regStr(sid,"/detail/(\\S+).html")
+			name = '--'.join(a.xpath('./@title')[:1])
+			pic = '--'.join(a.xpath('./@data-original')[:1])
+			mark = '--'.join(a.xpath("./span[@class='pic-text text-right']/text()")[:1])
+			sid = '--'.join(a.xpath("./@href")[:1])
 			videos.append({
 				"vod_id":sid,
 				"vod_name":name,
