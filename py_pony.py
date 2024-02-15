@@ -49,7 +49,7 @@ class Spider(Spider):  # 元类 默认的元类 type
 		# params[idx] = '{0}={1}'.format(filterParams[idx],extend[fp])
 		# suffix = '&'.join(params)
 		# url = f'https://www.feifan.in/{tid}/index-{pg}.html'
-		url = 'https://www.feifan.in/mainland/index-1.html'
+		url = 'https://www.feifan.in/{tid}/index-{pg}.html'.format(tid, pg)
 
 		rsp = self.fetch(url,headers=self.header)
 		root = self.html(rsp.text)
@@ -59,7 +59,7 @@ class Spider(Spider):  # 元类 默认的元类 type
 		for i, a in enumerate(aList):
 			videos.append({
 				"vod_id":str(i+1),
-				"vod_name":str(i+1)+ '--'.join(map(str, [tid, pg, filter, extend])),
+				"vod_name":'--'.join(map(str, [str(i+1000), tid, pg, filter, extend])),
 				"vod_pic":'',
 				"vod_remarks":''
 			})
