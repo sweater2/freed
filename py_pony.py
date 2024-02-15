@@ -59,7 +59,7 @@ class Spider(Spider):  # 元类 默认的元类 type
 		for i, a in enumerate(aList):
 			videos.append({
 				"vod_id":str(i+1),
-				"vod_name":str(i+1),
+				"vod_name":str(i+1)+ '--'.join(map(str, [tid, pg, filter, extend])),
 				"vod_pic":'',
 				"vod_remarks":''
 			})
