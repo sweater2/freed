@@ -48,14 +48,22 @@ class Spider(Spider):  # 元类 默认的元类 type
 		# 	if fp in extend.keys():
 		# params[idx] = '{0}={1}'.format(filterParams[idx],extend[fp])
 		# suffix = '&'.join(params)
-		url = f'https://www.feifan.in/{tid}/index-{pg}.html'
+		# url = f'https://www.feifan.in/{tid}/index-{pg}.html'
+		url = 'https://www.feifan.in/mainland/index-1.html'
 
 		rsp = self.fetch(url,headers=self.header)
 		root = self.html(rsp.text)
 		aList = root.xpath("//div[@id='contents']/ul/li/a")
 		videos = []
 		_xpath_str = lambda n, s, sep='--': sep.join(n.xpath(s))
-		for a in aList:
+		for i, a in enumerate(aList):
+			videos.append({
+				"vod_id":str(i+1),
+				"vod_name":str(i+1),
+				"vod_pic":'',
+				"vod_remarks":''
+			})
+			continue
 			name = _xpath_str(a, './img/@alt[1]')
 			pic = _xpath_str(a, './img/@data-url[1]')
 			pic = 'https://'+pic.lstrip('/') if pic.startswith('/') else pic
@@ -127,7 +135,7 @@ class Spider(Spider):  # 元类 默认的元类 type
 		"filter": {"TOPC1451557970755294": [{"key": "d", "name": "年份", "value": [{"n": "全部", "v": ""}, {"n": "2021", "v": "2021"}, {"n": "2020", "v": "2020"}, {"n": "2019", "v": "2019"}, {"n": "2018", "v": "2018"}, {"n": "2017", "v": "2017"}, {"n": "2016", "v": "2016"}, {"n": "2015", "v": "2015"}, {"n": "2014", "v": "2014"}, {"n": "2013", "v": "2013"}, {"n": "2012", "v": "2012"}, {"n": "2011", "v": "2011"}, {"n": "2010", "v": "2010"}, {"n": "2009", "v": "2009"}]}]}
 	}
 	header = {
-		"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.54 Safari/537.36"
+		"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
 	}
 
 	def localProxy(self,param):
