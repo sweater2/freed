@@ -65,10 +65,12 @@ class Spider(Spider):  # 元类 默认的元类 type
 			# })
 			# continue
 			name = _xpath_str(a, './img/@alt[1]')
-			pic = _xpath_str(a, './img/@data-url[1]')
-			pic = 'https://'+pic.lstrip('/') if pic.startswith('/') else pic
+			# pic = _xpath_str(a, './img/@data-url[1]')
+			# pic = 'https://'+pic.lstrip('/') if pic.startswith('/') else pic
+			pic = ''
 			mark = ''
-			sid = _xpath_str(a.xpath("./@href[1]"))
+			# sid = _xpath_str(a.xpath("./@href[1]"))
+			sid = str(i+1)
 			videos.append({
 				"vod_id":sid,
 				"vod_name":name,
