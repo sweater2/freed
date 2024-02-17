@@ -13,6 +13,11 @@
     'use strict';
 
     // Your code here...
+    const durl = document.location.href
+    if (durl.match(/pixiv\.net\/artworks\/\d+$/g) !== null) {
+        window.location.replace(durl+'#manga')
+    }
+
     setInterval(function() {
         // Array.from(document.querySelectorAll('div.list-item.column-2')).filter(n => !n.innerHTML.includes('ugoira')).map(n => n.remove())
         Array.from(document.querySelectorAll('a')).filter(n => n.href.includes('pixiv.net/artworks/')).map(n => {
