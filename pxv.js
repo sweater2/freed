@@ -23,8 +23,8 @@
         // if (durl.match(/pixiv\.net\/artworks\/\d+$/g) !== null) {
         //     window.location.replace(durl + '#manga')
         // }
-        const btn = document.querySelectorAll('a div.button-link')
-        if (btn.length > 0) { btn[0].click() }
+        // const btn = document.querySelectorAll('a div.button-link')
+        // if (btn.length > 0) { btn[0].click() }
 
         Array.from(document.querySelectorAll('div.list-item.column-2')).map(n => {
             if (n.getAttribute('ponyproc') !== null) return
@@ -34,10 +34,26 @@
         })
 
         Array.from(document.querySelectorAll('a')).filter(n => n.href.includes('pixiv.net/artworks/')).map(n => {
-            const url = n.href
-            n.target = '_blank'
-            if (url.match(/artworks\/\d+$/g) === null) return
-            n.href = url + '#manga'
+            if (n.getAttribute('ponyimgproc') !== 'y') {
+                // const username = Array.from(n.querySelectorAll('img[alt]')).map(n => n.alt).join('').split(' - ').slice(-1)[0].split('的插画')[0]
+                const username = Array.from(n.querySelectorAll('img[alt]')).map(n => n.alt).join('')
+                if (username.length > 0) {
+                    const tnode = document.createElement('p')
+                    tnode.innerText = username
+                    n.parentNode.append(tnode)
+                    // tnode.append(n)
+                    n.setAttribute('ponyimgproc', 'y')
+                }
+            }
+
+            if (n.getAttribute('ponyurlproc') !== 'y') {
+                const url = n.href
+                if (url.match(/artworks\/\d+$/g) !== null) {
+                    n.href = url + '#manga'
+                    n.target = '_blank'
+                    n.setAttribute('ponyurlproc', 'y')
+                }
+            }
         })
     }, 1000)
 })();
