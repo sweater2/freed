@@ -26,7 +26,7 @@
         // const btn = document.querySelectorAll('a div.button-link')
         // if (btn.length > 0) { btn[0].click() }
 
-        Array.from(document.querySelectorAll('div.list-item.column-2')).map(n => {
+        Array.from(document.querySelectorAll('div.list-item.column-2,div.list-item.column-3')).map(n => {
             if (n.getAttribute('ponyproc') !== null) return
             n.style['width'] = '51%'
             n.style['float'] = 'right'
