@@ -38,8 +38,11 @@
                 // const username = Array.from(n.querySelectorAll('img[alt]')).map(n => n.alt).join('').split(' - ').slice(-1)[0].split('的插画')[0]
                 const username = Array.from(n.querySelectorAll('img[alt]')).map(n => n.alt).join('')
                 if (username.length > 0) {
-                    const tnode = document.createElement('p')
+                    const tnode = document.createElement('textarea')
                     tnode.innerText = username
+                    tnode.disabled = true
+                    tnode.rows = 2
+                    tnode.style['width'] = '100%'
                     n.parentNode.append(tnode)
                     // tnode.append(n)
                     n.setAttribute('ponyimgproc', 'y')
