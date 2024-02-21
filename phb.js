@@ -15,15 +15,19 @@
 
     // Your code here...
     function _add_btn() {
-        const url = eval('flashvars_' + FLAG_COMMENT_DATA['itemId'])['mediaDefinitions'].filter(n => parseInt(n['quality']) === 720)[0]['videoUrl']
-        const pnode = document.createElement('p')
-        const anode = document.createElement('a')
-        anode.style = 'border: 2px solid black;'
-        anode.text = 'M3U8'
-        anode.href = url
-        anode.target = '_blank'
-        pnode.appendChild(anode)
-        document.querySelectorAll('div.title-container')[0].prepend(pnode)
+        const itid = setInterval(function () {
+            const url = eval('flashvars_' + FLAG_COMMENT_DATA['itemId'])['mediaDefinitions'].filter(n => parseInt(n['quality']) === 720)[0]['videoUrl']
+            if (url.length < 10) return
+            const pnode = document.createElement('p')
+            const anode = document.createElement('a')
+            anode.style = 'border: 2px solid black;'
+            anode.text = 'M3U8'
+            anode.href = url
+            anode.target = '_blank'
+            pnode.appendChild(anode)
+            document.querySelectorAll('div.headerWrap,div.title-container')[0].prepend(pnode)
+            clearInterval(itid)
+        }, 1000)
     }
     _add_btn()
 })();
