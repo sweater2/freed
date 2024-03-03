@@ -163,7 +163,7 @@
 
     function _play_btns() {
         const plyr_obj = document.querySelectorAll('div.plyr--video video')[0].plyr
-
+    
         function _btn(value, func) {
             var btn_div = document.createElement('div')
             var btn = document.createElement('input')
@@ -175,10 +175,10 @@
             btn_div.appendChild(btn)
             return btn_div
         }
-
+    
         var parent_node = document.createElement('div')
         parent_node.style = 'z-index: 99; float: right'
-        document.querySelectorAll('div.plyr--video')[0].parentNode.prepend(parent_node)
+        document.querySelectorAll('div.plyr--video')[0].parentNode.append(parent_node)
         parent_node.appendChild(_btn('+10s', function () {
             plyr_obj.currentTime = plyr_obj.currentTime + 10
             plyr_obj.play()
