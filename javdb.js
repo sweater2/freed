@@ -95,7 +95,13 @@
             divnode.prepend(anode)
 
             Array.from(document.querySelectorAll('div.item>a')).map(n => {
-                const jcode = n.querySelectorAll('span[data-code]')[0].getAttribute('data-code')
+                let jcode = n.querySelectorAll('span[data-code]')
+                if (jcode.length > 0) {
+                    jcode = jcode[0].getAttribute('data-code')
+                }
+                else {
+                    jcode = n.querySelectorAll('div.video-title strong')[0].innerText
+                }
                 let pnode = document.createElement('p')
 
                 pnode.appendChild([1].map(n => {
