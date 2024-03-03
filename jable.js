@@ -5,6 +5,7 @@
 // @description  try to take over the world!
 // @author       You
 // @match        https://jable.tv/videos/*
+// @match        https://javdb.com/*play?*
 // @icon         https://www.google.com/s2/favicons?domain=jable.tv
 // @grant        none
 // ==/UserScript==
@@ -105,7 +106,7 @@
         function _init_plyr(start_sec, prev_vnode) {
             const div_node = document.createElement('div')
             const video_node = document.createElement('video')
-            const node_id = 'ponyplyr'+start_sec
+            const node_id = 'ponyplyr' + start_sec
             video_node.id = node_id
             video_node.crossorigin = "anonymous"
             video_node.playsinline = true
@@ -113,7 +114,7 @@
             prev_vnode.parentElement.appendChild(div_node)
             div_node.appendChild(video_node)
             console.log(node_id)
-            const player = new Plyr('#'+node_id,
+            const player = new Plyr('#' + node_id,
                 {
                     previewThumbnails: { enabled: true, src: vttUrl },
                     // fullscreen: { enabled: true, fallback: 'force' },
@@ -132,8 +133,8 @@
         }
 
         function _set_time(start_sec) {
-            const node_id = 'ponyplyr'+start_sec
-            document.querySelectorAll('#'+node_id)[0].currentTime = start_sec
+            const node_id = 'ponyplyr' + start_sec
+            document.querySelectorAll('#' + node_id)[0].currentTime = start_sec
         }
 
         const itid = setInterval(function () {
@@ -144,13 +145,13 @@
             const slice_num = Math.ceil(prev_vnode.querySelectorAll('video')[0].duration / 600)
             if (slice_num > 0) {
                 setTimeout(function () {
-                    for (let _i=0; _i<slice_num; _i++) {
-                        _init_plyr(_i*600, prev_vnode)
+                    for (let _i = 0; _i < slice_num; _i++) {
+                        _init_plyr(_i * 600, prev_vnode)
                     }
 
                     setTimeout(function () {
-                        for (let _i=0; _i<slice_num; _i++) {
-                            _set_time(_i*600)
+                        for (let _i = 0; _i < slice_num; _i++) {
+                            _set_time(_i * 600)
                         }
                     }, 2000)
 
@@ -162,48 +163,53 @@
     }
 
     function _play_btns() {
-        const plyr_obj = document.querySelectorAll('div.plyr--video video')[0].plyr
+        setInterval(function () {
+            const plyr_obj = document.querySelectorAll('div.plyr--video video')[0].plyr
+
+            function _btn(value, func) {
+                var btn_div = document.createElement('div')
+                var btn = document.createElement('input')
+                btn.className = 'ponybtn'
+                btn.type = 'button'
+                btn.style = 'min-height: 40px'
+                btn.id = value
+                btn.value = value
+                btn.onclick = func
+                btn_div.appendChild(btn)
+                return btn_div
+            }
     
-        function _btn(value, func) {
-            var btn_div = document.createElement('div')
-            var btn = document.createElement('input')
-            btn.className = 'ponybtn'
-            btn.type = 'button'
-            btn.id = value
-            btn.value = value
-            btn.onclick = func
-            btn_div.appendChild(btn)
-            return btn_div
-        }
-    
-        var parent_node = document.createElement('div')
-        parent_node.style = 'z-index: 99; float: right'
-        document.querySelectorAll('div.plyr--video')[0].parentNode.append(parent_node)
-        parent_node.appendChild(_btn('+10s', function () {
-            plyr_obj.currentTime = plyr_obj.currentTime + 10
-            plyr_obj.play()
-        }))
-        parent_node.appendChild(_btn('+1m', function () {
-            plyr_obj.currentTime = plyr_obj.currentTime + 60
-        }))
-        parent_node.appendChild(_btn('+10m', function () {
-            plyr_obj.currentTime = plyr_obj.currentTime + 600
-        }))
-        parent_node.appendChild(_btn('----', function () {
-        }))
-        parent_node.appendChild(_btn('-10s', function () {
-            plyr_obj.currentTime = plyr_obj.currentTime - 10
-        }))
-        parent_node.appendChild(_btn('-1m', function () {
-            plyr_obj.currentTime = plyr_obj.currentTime - 60
-        }))
-        parent_node.appendChild(_btn('-10m', function () {
-            plyr_obj.currentTime = plyr_obj.currentTime - 600
-        }))
+            Array.from(document.querySelectorAll('div.ponybtndiv')).map(n => n.remove())
+            var parent_node = document.createElement('div')
+            parent_node.className = 'ponybtndiv'
+            parent_node.style = 'z-index: 99; float: right'
+            document.querySelectorAll('div.plyr--video')[0].parentNode.append(parent_node)
+            parent_node.appendChild(_btn('+10s', function () {
+                plyr_obj.currentTime = plyr_obj.currentTime + 10
+                plyr_obj.play()
+            }))
+            parent_node.appendChild(_btn('+1m', function () {
+                plyr_obj.currentTime = plyr_obj.currentTime + 60
+            }))
+            parent_node.appendChild(_btn('+10m', function () {
+                plyr_obj.currentTime = plyr_obj.currentTime + 600
+            }))
+            parent_node.appendChild(_btn('----', function () {
+            }))
+            parent_node.appendChild(_btn('-10s', function () {
+                plyr_obj.currentTime = plyr_obj.currentTime - 10
+            }))
+            parent_node.appendChild(_btn('-1m', function () {
+                plyr_obj.currentTime = plyr_obj.currentTime - 60
+            }))
+            parent_node.appendChild(_btn('-10m', function () {
+                plyr_obj.currentTime = plyr_obj.currentTime - 600
+            }))
+        }, 3000)
     }
 
-    add_btn2()
-    _tmp2()
+    // _tmp2()
     _play_btns()
-    // _tmp()
+    _tmp()
+    add_btn2()
 })();
