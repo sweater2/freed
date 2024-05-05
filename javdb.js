@@ -125,6 +125,15 @@
                 pnode.appendChild([1].map(n => {
                     let anode = document.createElement('a')
                     anode.style = 'border: 2px solid black;'
+                    anode.text = 'NJAV ' + jcode
+                    anode.href = 'https://njav.tv/zh/search?keyword=' + jcode
+                    anode.target = '_blank'
+                    return anode
+                })[0])
+
+                pnode.appendChild([1].map(n => {
+                    let anode = document.createElement('a')
+                    anode.style = 'border: 2px solid black;'
                     anode.text = 'JMENU ' + jcode
                     anode.href = 'https://javmenu.com/search?wd=' + jcode
                     anode.target = '_blank'
@@ -133,6 +142,14 @@
                 n.parentNode.appendChild(pnode)
             })
         }
+
+        function _search_redirect() {
+            if (!document.location.href.includes('/search')) return
+            const jcode = document.location.search.match(/q=([^&]+)/)[1].toUpperCase()
+            const result = Array.from(document.querySelectorAll('a')).filter(n => n.href.includes('/v/')).filter(n => n.text.toUpperCase().includes(jcode))
+            if (result.length === 1) { window.location.replace(result[0].href) }
+        }
+        _search_redirect()
         _tmp3()
     }
     return
