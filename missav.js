@@ -209,13 +209,16 @@
         }, 2000)
         setInterval(() => {
             Array.from(document.querySelectorAll('a.text-secondary')).filter(n => n.href.includes('/cn/')).map(n => {
-                if (n.parentNode.parentNode.querySelectorAll('p.ponysearch').length>0) return
+                if (n.getAttribute('ponyproc') === 'y') return
+                const root = n.parentNode.parentNode.parentNode
+                // if (n.parentNode.parentNode.querySelectorAll('p.ponysearch').length>0) return
                 const jcode = n.href.split('/').slice(-1)[0].split('#')[0].split('-').slice(0, 2).join('-')
                 console.log(jcode)
                 if (jcode.length <= 4) return
                 const url = 'https://javdb.com/search?f=all&q=' + jcode
-                n.parentNode.parentNode.appendChild([1].map(x => {
-                    let pnode = document.createElement('p')
+                if (url.includes('undefine')) return
+                root.insertBefore([1].map(x => {
+                    let pnode = document.createElement('div')
                     pnode.style = 'border: 2px solid black;'
                     pnode.className = 'ponysearch'
                     let anode = document.createElement('a')
@@ -224,7 +227,8 @@
                     anode.target = '_blank'
                     pnode.appendChild(anode)
                     return pnode
-                })[0])
+                })[0], n.parentNode.parentNode)
+                n.setAttribute('ponyproc', 'y')
             })
         }, 1000)
         setTimeout(() => {
