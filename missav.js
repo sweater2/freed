@@ -209,12 +209,12 @@
         }, 2000)
         setInterval(() => {
             Array.from(document.querySelectorAll('a.text-secondary')).filter(n => n.href.includes('/cn/')).map(n => {
-                if (n.querySelectorAll('p.ponysearch').length>0) return
+                if (n.parentNode.parentNode.querySelectorAll('p.ponysearch').length>0) return
                 const jcode = n.href.split('/').slice(-1)[0].split('#')[0].split('-').slice(0, 2).join('-')
                 console.log(jcode)
                 if (jcode.length <= 4) return
                 const url = 'https://javdb.com/search?f=all&q=' + jcode
-                n.appendChild([1].map(x => {
+                n.parentNode.parentNode.appendChild([1].map(x => {
                     let pnode = document.createElement('p')
                     pnode.style = 'border: 2px solid black;'
                     pnode.className = 'ponysearch'
