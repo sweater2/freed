@@ -36,9 +36,9 @@
                 imgs.filter(n2 => !n2.outerHTML.includes('display: none') && !n2.outerHTML.includes('loading="lazy"') && n2.className!==imgclass))
             if (orig_imgs.length!==0) {
                 orig_imgs.slice(1).map(n => n.remove())
-                // if (orig_imgs[0].complete) {
-                //     Array.from(n.querySelectorAll('img.'+imgclass)).map(n => n.remove())
-                // }
+                if (orig_imgs[0].complete) {
+                    Array.from(n.querySelectorAll('img.'+imgclass)).map(n => {n.style['max-height'] = window.innerHeight*0.5+'px'})
+                }
                 return
             }
 
@@ -64,7 +64,8 @@
             user_stat[user_url].push(imgnum)
         })
     
-        user_stat = Object.entries(user_stat).map(kv => [kv[0], kv[1].length, kv[1].reduce((a, b) => a + b)]).toSorted((a, b) => {
+        user_stat = Object.entries(user_stat).map(kv => [kv[0], kv[1].length, kv[1].reduce((a, b) => a + b)])
+        user_stat.sort((a, b) => {
             if (a[2] !== b[2]) return a[2] - b[2]
             if (a[1] !== b[1]) return a[1] - b[1]
             return a[0] < b[0] ? 1 : -1
