@@ -6,6 +6,7 @@
 // @author       You
 // @match        https://kemono.su/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=kemono.su
+// @downloadURL  https://raw.githubusercontent.com/sweater2/freed/master/kemono.js
 // @grant        none
 // ==/UserScript==
 
@@ -13,6 +14,39 @@
     'use strict';
 
     // Your code here...
+    function _load_imgs() {
+        let imgcount = 0
+
+        Array.from(document.querySelectorAll('div.post__thumbnail a')).map(n => {
+            if (imgcount >= 10) return
+            const imgclass = 'ponyimgtmp'
+            let imgs = Array.from(n.querySelectorAll('img'))
+            if (imgs.length === 1) {
+                const imgnode = document.createElement('img')
+                imgnode.className = imgclass
+                imgnode.src = imgs[0].src
+                n.append(imgnode)
+                imgs[0].click()
+                imgs[0].style['display'] = 'none'
+                imgcount++
+                return n
+            }
+
+            const orig_imgs = Array.from(
+                imgs.filter(n2 => !n2.outerHTML.includes('display: none') && !n2.outerHTML.includes('loading="lazy"') && n2.className!==imgclass))
+            if (orig_imgs.length!==0) {
+                orig_imgs.slice(1).map(n => n.remove())
+                // if (orig_imgs[0].complete) {
+                //     Array.from(n.querySelectorAll('img.'+imgclass)).map(n => n.remove())
+                // }
+                return
+            }
+
+            imgs[0].click()
+            imgcount++
+            return n
+        })
+    }
     const itid = setInterval(function () {
         if (document.querySelectorAll('article').length<1) return
     
@@ -57,37 +91,9 @@
     }, 1000)
 
     if (document.location.href.includes('/post/')) {
+        _load_imgs()
         setInterval(() => {
-            let imgcount = 0
-
-            Array.from(document.querySelectorAll('div.post__thumbnail a')).map(n => {
-                if (imgcount >= 10) return
-                const imgclass = 'ponyimgtmp'
-                let imgs = Array.from(n.querySelectorAll('img'))
-                if (imgs.length === 1) {
-                    const imgnode = document.createElement('img')
-                    imgnode.className = imgclass
-                    imgnode.src = imgs[0].src
-                    n.append(imgnode)
-                    imgs[0].click()
-                    imgs[0].style['display'] = 'none'
-                    imgcount++
-                    return n
-                }
-
-                const orig_imgs = Array.from(imgs.filter(n2 => !n2.outerHTML.includes('display: none') && !n2.outerHTML.includes('loading="lazy"')))
-                if (orig_imgs.length!==0) {
-                    orig_imgs.slice(1).map(n => n.remove())
-                    if (orig_imgs[0].complete) {
-                        Array.from(n.querySelectorAll('img.'+imgclass)).map(n => n.remove())
-                    }
-                    return
-                }
-
-                imgs[0].click()
-                imgcount++
-                return n
-            })
+            _load_imgs()
 
             if (document.querySelectorAll('footer.post__footer div.post__actions').length===0) {
                 document.querySelectorAll('footer.post__footer')[0].prepend(document.querySelectorAll('div.post__actions')[0])
