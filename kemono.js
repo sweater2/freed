@@ -47,6 +47,13 @@
             return n
         })
     }
+
+    // 去广告
+    setInterval(() => {
+        Array.from(document.querySelectorAll('div.ad-container,div#player-container')).map(n => {n.style['display']='none'})
+    }, 1000);
+
+    // 统计
     const itid = setInterval(function () {
         if (document.querySelectorAll('article').length<1) return
     
@@ -91,6 +98,7 @@
         clearInterval(itid)
     }, 1000)
 
+    // 自动加载
     if (document.location.href.includes('/post/')) {
         _load_imgs()
         setInterval(() => {
