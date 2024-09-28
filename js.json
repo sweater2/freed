@@ -3,7 +3,7 @@
 "lives":[],
 "wallpaper":"https://jianbian.chuqiuyu.workers.dev",
 "sites": [
-    {"key":"drpy_js_南瓜影视","name":"影视 | 南瓜影视[js]","type":3,"api":"./lib/drpy2.min.js","ext":"./js/南瓜影视.js"}
+    {"key":"drpy_js_南瓜影视","name":"影视 | 南瓜影视[js]","type":3,"api":"./drpy2.min.js","ext":"./南瓜影视.js"}
 ],
 "parses":[
 ],
