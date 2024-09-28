@@ -14,6 +14,53 @@ globalThis.getHeaders= function(input){
 	};
 	return headers
 }
+
+globalThis.ponyinfos = [
+    {
+        "blurb": "　　该剧讲述了代号“山豹”的中共特工赵文忠与日本人斗智斗勇，成功保卫了国家领土与宝藏的故事。",
+        "category": "国产剧|内地|2021",
+        "director": "何群",
+        "id": 123601,
+        "img": "https://img.lzzyimg.com/upload/vod/20240229-1/4d606d4df5820e0d2bd54a5c00db774c.jpg",
+        "main_actor": "邢佳栋,屈玥,薛皓文",
+        "qingxidu": "已完结",
+        "type": 2,
+        "video_name": "代号·山豹"
+    },
+    {
+        "blurb": "“九一八”事变后，马占山将军密切关注东北局势，以巨大的爱国热情，反击日本侵略者。他整军备战，妥善处理了黑河军民因仇日而引发的骚乱，刀劈叛逃的黄连长，抓捕日谍，挫败了日谍的报复暗杀。马占山挟愤入关，面见",
+        "category": "国产剧|内地|2016",
+        "director": "李印",
+        "id": 205213,
+        "img": "https://sf1-ttcdn-tos.pstatp.com/obj/xigua-lvideo-pic/d5b83bc1ba669ec18824eb10d3c204ac",
+        "main_actor": "李幼斌,施京明,王祉萱,米学东,刘金山,沙景昌,刘威,张光北,王佳宁,孙小飞,江水,张笑君,马卓君,孙羽缇",
+        "qingxidu": "全38集",
+        "type": 2,
+        "video_name": "决战江桥"
+    },
+    {
+        "blurb": "1934年在红军长征期间，红三十四师作为红军的后卫部队，担任着在长征路上掩护红军主力部队突围的任务。为了突破国民党军第四道封锁线，一支全由闽西客家子弟组成的红五军团第三十四师，与数十倍于红军的国民党军浴血奋战。",
+        "category": "连续剧|内地|2016",
+        "director": "不详",
+        "id": 178725,
+        "img": "https://p1.img.cctvpic.com/photoAlbum/vms/standard/img/2016/10/9/VSETTU8X4LB2YLlKWNuw4M8h161009.jpg",
+        "main_actor": "不详",
+        "qingxidu": "32集全",
+        "type": 2,
+        "video_name": "绝命后卫师"
+    },
+    {
+        "blurb": "1927年“四•一二”后，国共合作破裂。\\n蒋介石的特派员李耀川和中共北方局领导秦声达这对曾经的结拜兄弟回到陕西，在清党运动中，他们分道扬镳，在信仰和亲情中挣扎。而他们的下一代，李志远、秦怀文、秦怀武",
+        "category": "国产剧|内地|2016",
+        "director": "王飞",
+        "id": 124758,
+        "img": "https://pic2.iqiyipic.com/image/20200916/b9/f6/a_100034338_m_601_m5_260_360.jpg",
+        "main_actor": "张粟,吕一,姬他",
+        "qingxidu": "全40集",
+        "type": 2,
+        "video_name": "红旗漫卷西风"
+    },
+    ]
 	
 var rule = {
 	title:'南瓜影视',
@@ -88,7 +135,7 @@ var rule = {
             log(e.toString())
         }
 	`,
-	推荐:`js:
+	推荐original:`js:
         var d = [];
         let html = request(input, {
             headers: getHeaders(input)
@@ -99,6 +146,18 @@ var rule = {
                 title: it.name,
                 img: it.img,
                 desc: it.remarks,
+                url: it.id
+            })
+        });
+        setResult(d);
+    `,
+	推荐:`js:
+        var d = [];
+        ponyinfos.forEach(function(it) {
+            d.push({
+                title: it.video_name,
+                img: it.img,
+                desc: it.qingxidu,
                 url: it.id
             })
         });
