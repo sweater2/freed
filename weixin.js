@@ -28,31 +28,59 @@
             parentElement.insertBefore(newElement, targetElement.nextSibling)
         }
     }
+
+    function _split_lines_bak(n) {
+        // use $1 as regex group: https://stackoverflow.com/questions/1234712/javascript-replace-with-reference-to-matched-group
+        const lines = n.innerText.replace(/(，|。|：|；|？|！|、)/g, '$1\n').split('\n').filter(t => t.length>0)
+        if (lines.length>1) {
+            n.innerText = ''
+            n.style['margin-bottom'] = '15px'
+
+            const par_node = n.parentNode
+            lines.slice(0,-1).map(t => {
+                // let new_node = n.cloneNode()
+                let new_node = document.createElement('p')
+                new_node.style['margin-bottom'] = '15px'
+                new_node.innerText = t
+                par_node.insertBefore(new_node, n)
+            })
+            n.innerText = lines.slice(-1)[0]
+            par_node.append(document.createElement('p'))
+            par_node.append(document.createElement('p'))
+        } 
+    }
+
+    function _split_lines(n) {
+        n.setAttribute('ponyproc', 'y')
+
+        // use $1 as regex group: https://stackoverflow.com/questions/1234712/javascript-replace-with-reference-to-matched-group
+        const lines = n.innerText.replace(/(，|。|：|；|？|！|、)/g, '$1\n').split('\n').filter(t => t.length>0)
+        if (lines.length>1) {
+            n.innerText = ''
+
+            const par_node = n
+            lines.map(t => {
+                let new_node = document.createElement('p')
+                new_node.setAttribute('ponyproc', 'y')
+                new_node.setAttribute('style', n.getAttribute('style'))
+                new_node.style['margin-bottom'] = '15px'
+                new_node.innerText = t
+                par_node.append(new_node)
+            })
+            par_node.append(document.createElement('hr'))
+        } 
+    }
     
     setInterval(() => {
-        Array.from(document.querySelectorAll('span')).map(n => {
-            if (n.getAttribute('ponyproc')==='y') {return}
-            // use $1 as regex group: https://stackoverflow.com/questions/1234712/javascript-replace-with-reference-to-matched-group
-            const lines = n.innerText.replace(/(，|。|：|；|？|！)/g, '$1\n').split('\n').filter(t => t.length>0)
-            // console.log(n)
-            // console.log(lines)
+        Array.from(document.querySelectorAll('p:not([ponyproc]')).map(n => {
+            // if (n.getAttribute('ponyproc')==='y') {return}
+
+            let childs = Array.from(n.querySelectorAll('span'))
+            if (childs.length==0) {childs = [n]}
+            childs.map(_split_lines)
             n.setAttribute('ponyproc', 'y')
-            if (lines.length>1) {
-                const par_node = n.parentNode
-                n.innerText = ''
-                n.style['margin-bottom'] = '15px'
-                lines.slice(0,-1).map(t => {
-                    // let new_node = n.cloneNode()
-                    let new_node = document.createElement('p')
-                    new_node.style['margin-bottom'] = '15px'
-                    new_node.innerText = t
-                    par_node.insertBefore(new_node, n)
-                    // par_node.insertBefore(document.createElement('br'), n)
-                })
-                n.innerText = lines.slice(-1)[0]
-                par_node.append(document.createElement('p'))
-                par_node.append(document.createElement('p'))
-            }
         })
+
+        Array.from(document.querySelectorAll('span:not([ponyproc]')).map(_split_lines)
     }, 2000)
 })();
