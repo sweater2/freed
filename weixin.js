@@ -67,20 +67,37 @@
                 new_node.innerText = t
                 par_node.append(new_node)
             })
-            par_node.append(document.createElement('hr'))
         } 
     }
     
-    setInterval(() => {
-        Array.from(document.querySelectorAll('p:not([ponyproc]')).map(n => {
-            // if (n.getAttribute('ponyproc')==='y') {return}
+    function _wrap_text_nodes(n) {
+        Array.from(n.childNodes).filter(n => n.nodeType === Node.TEXT_NODE).map(n2 => {
+            let new_node = document.createElement('span')
+            new_node.innerText = n2.textContent
+            new_node.className = 'ponywrap'
+            n2.replaceWith(new_node)
+            _split_lines(new_node)
+        })
+    }
 
-            let childs = Array.from(n.querySelectorAll('span'))
-            if (childs.length==0) {childs = [n]}
-            childs.map(_split_lines)
+    setInterval(() => {
+        // 把没有被p/span等节点包裹的文本先做处理
+        Array.from(document.querySelectorAll('section:not([ponyproc])')).map(n => {
+            _wrap_text_nodes(n)
+            n.append(document.createElement('hr'))
             n.setAttribute('ponyproc', 'y')
         })
 
-        Array.from(document.querySelectorAll('span:not([ponyproc]')).map(_split_lines)
+        Array.from(document.querySelectorAll('p:not([ponyproc])')).map(n => {
+            // if (n.getAttribute('ponyproc')==='y') {return}
+
+            Array.from(n.querySelectorAll('span')).map(_split_lines)
+            _wrap_text_nodes(n)
+            n.append(document.createElement('hr'))
+            n.setAttribute('ponyproc', 'y')
+        })
+
+        Array.from(document.querySelectorAll('span:not([ponyproc])')).map(_split_lines)
+
     }, 2000)
 })();
